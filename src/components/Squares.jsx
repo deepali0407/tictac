@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Squares = props => {
+const Squares = ({value}) => {
     return (
-         <button>{props.value}</button>
+         <button>{value}</button>
     )
 }
 
