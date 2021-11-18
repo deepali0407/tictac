@@ -1,0 +1,25 @@
+.board{
+.board-row{
+    
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid white;
+    &:last-child{
+        border-bottom: none;
+    }
+}
+}
+
+.app{
+    display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 20px;
+    
+}
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #6610f2;
+    color: white;
+}

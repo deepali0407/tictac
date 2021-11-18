@@ -1,9 +1,10 @@
 import React from 'react'
+import "./styles/SquareStyle.scss"
 
-const Squares = ({value}) => {
+const Squares = ({ value }) => {
     return (
-         <button>{value}</button>
+         <button type="button" className="square">{value}</button>
     )
 }
 
-export default Squares
+export default Squares;
