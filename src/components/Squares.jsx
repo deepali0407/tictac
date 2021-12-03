@@ -1,10 +1,18 @@
-import React from 'react'
-import "./styles/SquareStyle.scss"
+import React, { useState } from "react";
+import "./styles/SquareStyle.scss";
 
-const Squares = ({ value }) => {
-    return (
-         <button type="button" className="square">{value}</button>
-    )
-}
+const Squares = ({ value, onClick }) => {
+  return (
+    <button
+      type="button"
+      className="square"
+      onClick={() => {
+        onClick();
+      }}
+    >
+      {value}
+    </button>
+  );
+};
 
 export default Squares;
