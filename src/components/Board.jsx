@@ -1,28 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Squares from "./Squares";
 import "./styles/BoardStyle.scss";
 
-const Board = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext,setIsXNext] = useState(true);
-  console.log(board);
-
-  //handles 
-  const logicHandler = (position) => {
-     if(board[position]){
-       return ;
-     }
-     setBoard((prev) => {
-       return prev.map((square,pos) => {
-         if(pos === position){
-           return isXNext ? 'X' : 'O';
-         }
-         return square ;
-       })
-     })
-     setIsXNext(prev => !prev)    
-  };
-
+const Board = ( {board,logicHandler} ) => {
+  
   const renderSquare = position => {
     //destructuring
     return (
