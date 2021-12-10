@@ -1,37 +1,51 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 import Board from "./components/Board";
+import History from "./components/History";
 import { calculateWinner } from "./helper";
 
 const App = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext,setIsXNext] = useState(true);
-  
-  const winner = calculateWinner(board);
-  const message = winner? `Winner is ${winner}` : `Next Player is ${isXNext? 'X':'O'}`
-  console.log(board);
+  const [history, setHistory] = useState([
+    { board: Array(9).fill(null), isXNext: true },
+  ]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const current = history[currentMove];
 
-  //handles 
+  //check: console.log("history", history);
+  const winner = calculateWinner(current.board);
+  const message = winner
+    ? `Winner is ${winner}`
+    : `Next Player is ${current.isXNext ? "X" : "O"}`;
+  // check: console.log(current.board);
+
+  //handles
   const logicHandler = (position) => {
-     if(board[position] || winner){
-       return ;
-     }
-     setBoard((prev) => {
-       return prev.map((square,pos) => {
-         if(pos === position){
-           return isXNext ? 'X' : 'O';
-         }
-         return square ;
-       })
-     })
-     setIsXNext(prev => !prev)    
+    if (current.board[position] || winner) {
+      return;
+    }
+    setHistory((prev) => {
+      const last = prev[prev.length - 1];
+
+      const newBoard = last.board.map((square, pos) => {
+        if (pos === position) {
+          return last.isXNext ? "X" : "O";
+        }
+        return square;
+      });
+      return prev.concat({ board: newBoard, isXNext: !last.isXNext });
+    });
+    setCurrentMove((prev) => prev + 1);
   };
+  const moveTo = (move) => {
+    setCurrentMove(move)
+  }
 
   return (
     <div className="app">
       <h1>TIC TAC TOE!</h1>
       <h2>{message}</h2>
-      <Board board={board} logicHandler={logicHandler} />
+      <Board board={current.board} logicHandler={logicHandler} />
+      <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
-}
+};
 export default App;
