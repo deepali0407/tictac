@@ -1,15 +1,18 @@
 import React from "react";
 import Squares from "./Squares";
 import "./styles/BoardStyle.scss";
-
-const Board = ( {board,logicHandler} ) => {
+  //destructuring
+const Board = ( {board,logicHandler,winningSquares} ) => {
   
   const renderSquare = position => {
-    //destructuring
+    
+    const isWinningSquare = winningSquares.includes(position);
+
     return (
       <Squares
         value={board[position]}
         onClick={() =>  logicHandler(position)}
+        isWinningSquare = {isWinningSquare}
       />
     );
   };

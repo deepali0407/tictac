@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/SquareStyle.scss";
 
-const Squares = ({ value, onClick }) => {
+const Squares = ({ value, onClick, isWinningSquare }) => {
   return (
     <button
       type="button"
@@ -9,6 +9,8 @@ const Squares = ({ value, onClick }) => {
       onClick={() => {
         onClick();
       }}
+      style={{fontWeight : isWinningSquare ? 'bold' : 'normal'}  }
+
     >
       {value}
     </button>
